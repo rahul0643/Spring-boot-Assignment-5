@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean definition for UserRepository (data layer) -->
+    <bean id="userRepository" class="com.assignment.UserRepository"/>
+
+    <!-- Bean definition for UserService (service layer) -->
+    <!-- UserRepository is injected into UserService using SETTER injection -->
+    <bean id="userService" class="com.assignment.UserService">
+        <property name="repo" ref="userRepository"/>
+    </bean>
+
+    <!-- Bean definition for UserController (presentation layer) -->
+    <!-- UserService is injected into UserController using CONSTRUCTOR injection -->
+    <bean id="userController" class="com.assignment.UserController">
+        <constructor-arg ref="userService"/>
+    </bean>
+
+</beans>
